@@ -5,11 +5,7 @@ import java.util.*;
 
 public class General {
 
-    enum TextCase {
-        Capitalize, UpperCase, LowerCase, None
-    }
-
-    enum IDPattern {
+    public enum IDPattern {
         Short, Short_DateOnly, Short_DateTime, Long, Long_DateTime
     }
 
@@ -21,10 +17,14 @@ public class General {
         Web, JavaScript, Custom, Nothing
     }
 
+    public enum SideToReturn{
+        Left, Right, AsArray, AsListOfString, AsListToString, AsCustomApplicationInfo, AsCustomApplicationInfoDisplayName, AsCustomApplicationInfoProcessName, AsCustomApplicationInfoFilename, AsCustomApplicationInfoInstallLocation
+    }
+
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh-mm-ss-ms");
 
-    public static String NewGUID(String prefix, AppendWith append_with_date_string, boolean truncate) {
+    public static String newGUID(String prefix, AppendWith append_with_date_string, boolean truncate) {
         StringBuilder result = new StringBuilder();
         result.append(prefix.length() > 0 ? prefix : "");
         result.append(result.toString().length() > 0 ? "-" : "");
@@ -39,55 +39,55 @@ public class General {
         return result.append(truncate ? id.substring(0, 13) : id).toString();
     }
 
-    public static String NewGUID(IDPattern pattern, String prefix) {
+    public static String newGUID(IDPattern pattern, String prefix) {
         String result = "";
         switch (pattern) {
             case Long -> {
-                result = NewGUID(prefix, AppendWith.Nothing, false);
+                result = newGUID(prefix, AppendWith.Nothing, false);
             }
             case Long_DateTime -> {
-                result = NewGUID(prefix, AppendWith.DateTime, false);
+                result = newGUID(prefix, AppendWith.DateTime, false);
             }
             case Short -> {
-                result = NewGUID(prefix, AppendWith.Nothing, true);
+                result = newGUID(prefix, AppendWith.Nothing, true);
             }
             case Short_DateOnly -> {
-                result = NewGUID(prefix, AppendWith.Date, true);
+                result = newGUID(prefix, AppendWith.Date, true);
             }
             case Short_DateTime -> {
-                result = NewGUID(prefix, AppendWith.DateTime, true);
+                result = newGUID(prefix, AppendWith.DateTime, true);
             }
         }
         return result;
     }
 
-    public static String NewGUID(IDPattern pattern) {
+    public static String newGUID(IDPattern pattern) {
         String result = "";
         switch (pattern) {
             case Long -> {
-                result = NewGUID("", AppendWith.Nothing, false);
+                result = newGUID("", AppendWith.Nothing, false);
             }
             case Long_DateTime -> {
-                result = NewGUID("", AppendWith.DateTime, false);
+                result = newGUID("", AppendWith.DateTime, false);
             }
             case Short -> {
-                result = NewGUID("", AppendWith.Nothing, true);
+                result = newGUID("", AppendWith.Nothing, true);
             }
             case Short_DateOnly -> {
-                result = NewGUID("", AppendWith.Date, true);
+                result = newGUID("", AppendWith.Date, true);
             }
             case Short_DateTime -> {
-                result = NewGUID("", AppendWith.DateTime, true);
+                result = newGUID("", AppendWith.DateTime, true);
             }
         }
         return result;
     }
 
-    public static String WriteHTML(String content, String title){
+    public static String writeHTML(String content, String title){
         return previewHTML(content, title);
     }
 
-    public static String WriteHTML(String content){
+    public static String writeHTML(String content){
         return previewHTML(content, "Preview");
     }
 
@@ -218,7 +218,7 @@ public class General {
         return str_;
     }
 
-    public static String ListToString(List<String> list, String del){
+    public static String listToString(List<String> list, String del){
         StringBuilder r = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             r.append(list.get(i)).append(i < list.size() - 1 ? del : "");
@@ -226,7 +226,7 @@ public class General {
         return r.toString();
     }
 
-    public static String ListToString(Object[] list, String del){
+    public static String listToString(Object[] list, String del){
         StringBuilder r = new StringBuilder();
         for (int i = 0; i < list.length; i++) {
             r.append(list[i]).append(i < list.length - 1 ? del : "");
@@ -240,21 +240,23 @@ public class General {
         return result;
     }
 
+    public static List<String> stringToList(String s){
+        List<String> result = new ArrayList<>();
+        Arrays.stream(s.split("\n")).forEach(i -> result.add(i));
+        return result;
+    }
 
+    public static List<String> splitTextInSplits(String string, String delimiter){
+        return List.of(string.split(delimiter));
+    }
 
+    public static List<String> splitTextInSplits(String string, String delimiter, int how_many){
+        return List.of(string.split(delimiter, how_many));
+    }
 
-
+    public static String splitTextInTwo(String string, String delimiter, SideToReturn sideToReturn){
+        String[] splits = string.split(delimiter, 2);
+        return sideToReturn == SideToReturn.Left ? splits[0] : splits[1];
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
