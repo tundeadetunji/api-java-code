@@ -2,6 +2,7 @@ package io.github.tundeadetunji;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class General {
 
@@ -419,4 +420,12 @@ public class General {
         return sideToReturn == SideToReturn.Left ? splits[0] : splits[1];
     }
 
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+    public static boolean isEmail(String email){
+        return EMAIL_PATTERN.matcher(email).matches();
+    }
+
+    public static String removeHtmlFromText(String text){
+        return text.replaceAll("(<.*?>)|(&.*?;)|([ ]{2,})", "").replaceAll("(<.*?>)|(&.*?;)", " ").replaceAll("\\s{2,}", " ");
+    }
 }
