@@ -8,7 +8,7 @@ import static io.github.tundeadetunji.General.stringToList;
 
 
 /**
- * The type Checked difference.
+ * This class is used to check similarity and contrast between two strings.
  *
  * Example:
  * String a = "abc";
@@ -29,7 +29,7 @@ public final class CheckedDifference {
     private List<Integer> linesCommon = new ArrayList<>();
 
     /**
-     * Instantiates a new Checked difference.
+     * Instantiates a new CheckedDifference.
      *
      * @param first  the initial string
      * @param second the string to compare with first
