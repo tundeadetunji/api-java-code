@@ -4,12 +4,37 @@
 <dependency>
     <groupId>io.github.tundeadetunji</groupId>
     <artifactId>code</artifactId>
-    <version>1.0.0</version>
+    <version>check_maven_central_for_latest_version_using_link_below</version>
 </dependency>
 ```
 
 
 Check it out on <a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/1.0.0" target="_blank">Maven Central</a>
+
+
+If using Gradle:
+
+Add this in your root build.gradle at the end of repositories:
+
+```html
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+Then Add the dependency:
+
+```html
+dependencies {
+        implementation 'com.github.tundeadetunji:api-java-code:TAG'
+}
+```
+
+
+Where TAG is syncrhonized with that of the maven counterpart (<a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/1.0.0" target="_blank">Maven Central</a>).
+
 
 <br />
 For static imports (as required):
