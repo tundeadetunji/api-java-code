@@ -9,11 +9,11 @@ import static io.github.tundeadetunji.General.stringToList;
 
 /**
  * This class is used to check similarity and contrast between two strings.
- *
+ * <p>
  * Example:
  * String a = "abc";
  * String b = "ade";
- * CheckedDifference checked = new CheckedDifference(a, b);
+ * CheckedDifference checked = CheckedDifference.getInstance(a, b);
  * Terminology revolves around "but" and "and", so
  * start typing checked.a will generate (by intellisense) all methods with and
  * likewise checked.b will generate all methods with but
@@ -26,6 +26,8 @@ public final class CheckedDifference {
     private String restOfFirst = "";
     private String restOfSecond = "";
 
+    private static CheckedDifference instance;
+
     private List<Integer> linesCommon = new ArrayList<>();
 
     /**
@@ -35,12 +37,19 @@ public final class CheckedDifference {
      * @param second the string to compare with first
      * @throws AssertionError if first and/or second are/is not supplied
      */
-    public CheckedDifference(String first, String second) {
+    private CheckedDifference(String first, String second) {
         if ((first.isBlank() || first.isEmpty()) || (second.isBlank() || second.isEmpty()))
             throw new AssertionError("The string or the one to be compared with it not supplied!");
 
         this.first = first;
         this.second = second;
+    }
+
+    public static CheckedDifference getInstance(String first, String second) {
+        if (instance == null) {
+            instance = new CheckedDifference(first, second);
+        }
+        return instance;
     }
 
     private boolean alreadyCalledGetCharacterDifference = false;

@@ -6,10 +6,10 @@
 
     <groupId>io.github.tundeadetunji</groupId>
     <artifactId>code</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>Code Repertoire</name>
-    <description>A project containing handy functions for daily use</description>
+    <description>A project containing handy functions for daily use.</description>
     <url>https://github.com/tundeadetunji/api-java-code</url>
 
     <licenses>
