@@ -286,14 +286,9 @@ public class General {
      * @param content this will represent the bulk of the body section of the final markup snippet
      * @return HTML that can be placed in HTML file directly to create a (default custom) web page
      */
-    public static String previewHtml(String content)
-    {
+    public static String previewHtml(String content) {
         return previewHtml(content, "Preview");
     }
-
-    /*private static String replaceNewLineCharacterWithHtmlEquivalent(String content) {
-        return content.replace("\n", "<br />");
-    }*/
 
     /**
      * Transforms a string by replacing escape characters (carriage return, tab, etc.) to
@@ -355,6 +350,9 @@ public class General {
      * @return a string that combines all the items in the original list
      */
     public static String listToString(List<String> list, String del) {
+        assert list != null;
+        assert del != null && !del.isEmpty() && !del.isBlank();
+
         StringBuilder r = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             r.append(list.get(i)).append(i < list.size() - 1 ? del : "");
@@ -421,11 +419,198 @@ public class General {
     }
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-    public static boolean isEmail(String email){
+
+    /**
+     * Checks if string is valid email.
+     *
+     * @param email the string to check
+     * @return true if it's valid or false otherwise
+     */
+    public static boolean isEmail(String email) {
         return EMAIL_PATTERN.matcher(email).matches();
     }
 
-    public static String removeHtmlFromText(String text){
+    /**
+     * Removes hypertext markup from text.
+     *
+     * @param text the HTML to strip of markup
+     * @return string without HTML
+     */
+    public static String removeHtmlFromText(String text) {
         return text.replaceAll("(<.*?>)|(&.*?;)|([ ]{2,})", "").replaceAll("(<.*?>)|(&.*?;)", " ").replaceAll("\\s{2,}", " ");
     }
+
+    public static boolean isPhraseOrSentence(String text) {
+        assert !text.isEmpty() && !text.isBlank();
+        return text.split(" ", 2).length >= 2;
+    }
+
+    private static String[] lastThreeLetters(String text) {
+        if (text.trim().length() < 1) {
+            return new String[]{};
+        }
+
+        return new String[]{String.valueOf(text.charAt(text.length() - 3)),
+                String.valueOf(text.charAt(text.length() - 2)), String.valueOf(text.charAt(text.length() - 1))};
+    }
+
+    public static boolean isConsonant(String text) {
+        boolean isConsonant = false;
+
+        if (text.equals("b") || text.equals("c") || text.equals("d") || text.equals("f") || text.equals("g") || text.equals("h") || text.equals("j")
+                || text.equals("k") || text.equals("l") || text.equals("m") || text.equals("n") || text.equals("p") || text.equals("q") || text.equals("r")
+                || text.equals("s") || text.equals("t") || text.equals("v") || text.equals("w") || text.equals("x") || text.equals("y") || text.equals("z")
+                || text.equals("B") || text.equals("C") || text.equals("D") || text.equals("F") || text.equals("G") || text.equals("H") || text.equals("J")
+                || text.equals("K") || text.equals("L") || text.equals("M") || text.equals("N") || text.equals("P") || text.equals("Q") || text.equals("R")
+                || text.equals("S") || text.equals("T") || text.equals("V") || text.equals("W") || text.equals("X") || text.equals("Y")
+                || text.equals("Z")) {
+            isConsonant = true;
+        }
+        return isConsonant;
+    }
+
+    public static boolean isVowel(String text) {
+        boolean isVowel = false;
+        if (text.equals("a") || text.equals("e") || text.equals("i") || text.equals("o") || text.equals("u") || text.equals("A") || text.equals("E")
+                || text.equals("I") || text.equals("O") || text.equals("U")) {
+            isVowel = true;
+        }
+        return isVowel;
+    }
+
+    public static boolean isAlphabet(String text) {
+        boolean isAlphabet = false;
+
+        if (isVowel(text) || isConsonant(text)) {
+            isAlphabet = true;
+        }
+        return isAlphabet;
+    }
+
+    /**
+     * Turns phrase or sentence to continuous tense, and appends it with specified text.
+     * @param text phrase or sentence
+     * @param suffix what to append to the output
+     * @return string in continuous tense form
+     */
+    public static String toContinuousTense(String text, String suffix) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        String prefx = "";
+        String[] lastThree = lastThreeLetters(text);
+
+        if (!isAlphabet(lastThree[0]) || !isAlphabet(lastThree[1])
+                || !isAlphabet(lastThree[2])) {
+            return "";
+        }
+
+        String a = lastThree[0].toLowerCase();
+        String b = lastThree[1].toLowerCase();
+        String c = lastThree[2].toLowerCase();
+
+
+        if (a.equals("i") && b.equals("n") && c.equals("g")) {
+            return text;
+        }
+
+        // If IsConsonant(a) And IsVowel(b) And IsConsonant(c) Then
+        // prefx = text & Mid(text.Trim, text.Length, 1).Trim & "ing"
+        // ElseIf b = "i" And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 2).Trim & "ying"
+        // ElseIf IsVowel(a) And IsConsonant(b) And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 1).Trim & "ing"
+        // Else
+        // prefx = text.Trim & "ing"
+        // End If
+
+        if (isConsonant(a) && isVowel(b) && isConsonant(c)) {
+            // swim, stop, run, begin
+            prefx = text + text.substring(text.length() - 1).trim() + "ing";
+        } else if (b.equals("i") && c.equals("e")) {
+            //lie, die
+            prefx = text.substring(0, text.length() - 2).trim() + "ying";
+        } else if (isVowel(a) && isConsonant(b) && c.equals("e")) {
+            //come, mistake
+            prefx = text.substring(0, text.length() - 1).trim() + "ing";
+        } else {
+            prefx = text.trim() + "ing";
+        }
+        //mix, deliver
+
+        // Return RTrim(prefx) & " " & LTrim(suffix)
+        return prefx + " " + suffix;
+
+    }
+
+    /**
+     * Turns phrase or sentence to continuous tense.
+     * @param text phrase or sentence
+     * @return string in continuous tense form
+     */
+    public static String ToContinuousTense(String text) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        String prefx = "";
+        String[] lastThree = lastThreeLetters(text);
+
+        if (!isAlphabet(lastThree[0]) || !isAlphabet(lastThree[1])
+                || !isAlphabet(lastThree[2])) {
+            return "";
+        }
+
+        String a = lastThree[0].toLowerCase();
+        String b = lastThree[1].toLowerCase();
+        String c = lastThree[2].toLowerCase();
+
+
+        if (a.equals("i") && b.equals("n") && c.equals("g")) {
+            return text;
+        }
+
+        // If IsConsonant(a) And IsVowel(b) And IsConsonant(c) Then
+        // prefx = text & Mid(text.Trim, text.Length, 1).Trim & "ing"
+        // ElseIf b = "i" And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 2).Trim & "ying"
+        // ElseIf IsVowel(a) And IsConsonant(b) And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 1).Trim & "ing"
+        // Else
+        // prefx = text.Trim & "ing"
+        // End If
+
+        if (isConsonant(a) && isVowel(b) && isConsonant(c)) {
+            // swim, stop, run, begin
+            prefx = text + text.substring(text.length() - 1).trim() + "ing";
+        } else if (b.equals("i") && c.equals("e")) {
+            //lie, die
+            prefx = text.substring(0, text.length() - 2).trim() + "ying";
+        } else if (isVowel(a) && isConsonant(b) && c.equals("e")) {
+            //come, mistake
+            prefx = text.substring(0, text.length() - 1).trim() + "ing";
+        } else {
+            prefx = text.trim() + "ing";
+        }
+        //mix, deliver, cradle, juggle
+
+        // Return RTrim(prefx) & " " & LTrim(suffx)
+        return prefx;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

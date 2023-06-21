@@ -7,12 +7,12 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 public class Machine {
-    public static Object clipboardGetText() throws IOException, UnsupportedFlavorException {
+    public static Object getTextFromClipboard() throws IOException, UnsupportedFlavorException {
         return Toolkit.getDefaultToolkit()
                 .getSystemClipboard().getData(DataFlavor.stringFlavor);
     }
 
-    public static void clipboardSetText(String text) {
+    public static void sendTextToClipboard(String text) {
         Toolkit.getDefaultToolkit()
                 .getSystemClipboard()
                 .setContents(
