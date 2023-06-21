@@ -1,4 +1,6 @@
 # api-java-code
+A project containing handy functions for daily use.
+<br />
 
 ```html
 <dependency>
