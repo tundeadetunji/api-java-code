@@ -42,11 +42,12 @@ Where TAG is syncrhonized with that of the maven counterpart (<a href="https://c
 For static imports (as required):
 <br />
 <br />
-<pre>import static io.github.tundeadetunji.Charts.*;
+<pre>
 import static io.github.tundeadetunji.General.*;
 import static io.github.tundeadetunji.Machine.*;
 import static io.github.tundeadetunji.InCodeSpringBootGui.*;
-import static io.github.tundeadetunji.InCodeSpringBootApi.*;</pre>
+import static io.github.tundeadetunji.InCodeSpringBootApi.*;
+</pre>
 
 To check if a string is valid email, for example:
 ```java
