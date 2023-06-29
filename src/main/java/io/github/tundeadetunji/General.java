@@ -26,6 +26,10 @@ public class General {
         Left, Right, AsArray, AsListOfString, AsListToString, AsCustomApplicationInfo, AsCustomApplicationInfoDisplayName, AsCustomApplicationInfoProcessName, AsCustomApplicationInfoFilename, AsCustomApplicationInfoInstallLocation
     }
 
+    public enum SearchStringOperator {
+        OR_, AND_, NOT_
+    }
+
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh-mm-ss-ms");
 
