@@ -115,7 +115,7 @@ public class SearchEngineQueryString {
         return constructSiteString(sites) + " " + parameters_string.toString();
     }
 
-    public String constructSiteString(String site, String parameter){
+    public String constructQueryStringFromParameter(String site, String parameter){
         return constructSiteString(site) + " " + constructParameterString(parameter);
     }
 }
