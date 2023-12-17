@@ -17,6 +17,8 @@ import static io.github.tundeadetunji.General.stringToList;
  * Terminology revolves around "but" and "and", so
  * start typing checked.a will generate (by intellisense) all methods with and
  * likewise checked.b will generate all methods with but
+ *
+ * This class is no longer maintained, however.
  */
 public final class CheckedDifference {
     private final String first;

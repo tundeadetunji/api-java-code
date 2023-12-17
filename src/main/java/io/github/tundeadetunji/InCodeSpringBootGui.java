@@ -7,6 +7,8 @@ import static io.github.tundeadetunji.InCodeSpringBootApi.*;
 /**
  * The methods in this class can most likely increase productivity by
  * generating code snippets that can be pasted directly into the file.
+ *
+ *  This class is no longer maintained, however.
  */
 public class InCodeSpringBootGui {
     /**

@@ -6,6 +6,10 @@ import java.util.List;
 import static io.github.tundeadetunji.General.*;
 
 
+/**
+ * Methods to generate search strings (handy for targeting on Google's search).
+ * This class, as valid as it is, is no longer maintained, however.
+ */
 public class SearchEngineQueryString {
 
     public static class TermWithVariations {

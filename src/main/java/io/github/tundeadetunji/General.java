@@ -139,8 +139,11 @@ public class General {
 
     /**
      * Custom HTML snippet, intended to be for preview only.
-     * The CSS and JS are based on Shoppy's resources, but defaults to Bootstrap's
+     * The CSS and JS are based on Shoppy template's resources, but defaults to Bootstrap's
      * in the absence of Shoppy's.
+     *
+     * Shoppy Template used: https://w3layouts.com/template/shoppy-e-commerce-admin-panel-responsive-web-template/
+     * License (as at time of this file) at https://creativecommons.org/licenses/by/3.0/
      *
      * @param content this will represent the bulk of the body section of the final markup snippet
      * @param title   the title of the page which will be placed in the title tag of the markup snippet
@@ -370,17 +373,33 @@ public class General {
      *
      * @param string    the string to split into tokens
      * @param delimiter what to split the string along
-     * @return a list of strings
+     * @return immutable list of strings
      */
     public static List<String> stringToList(String string, String delimiter) {
         return List.of(string.split(delimiter));
+    }
+    /**
+     * Splits a string into tokens, each of which represents the string split along the characters specified
+     * by delimiter.
+     *
+     * @param string    the string to split into tokens
+     * @param delimiter what to split the string along
+     * @return list of strings, immutable or not.
+     */
+    public static List<String> stringToList(String string, String delimiter, boolean returnImmutable) {
+        if (returnImmutable) return List.of(string.split(delimiter));
+
+        List<String> tokens = new ArrayList<>(Arrays.asList(string.split(delimiter)));
+        List<String> result = new ArrayList<>();
+        tokens.stream().forEach(token -> result.add(token));
+        return result;
     }
 
     /**
      * Splits a string into tokens, each of which represents the string split along carriage return character.
      *
      * @param string the string to split into tokens
-     * @return a list of strings
+     * @return immutable list of strings
      */
     public static List<String> stringToList(String string) {
         return List.of(string.split("\n"));
@@ -391,7 +410,7 @@ public class General {
      *
      * @param string    the string to split into tokens
      * @param delimiter what to split the string along
-     * @return a list of strings
+     * @return immutable list of strings
      */
     public static List<String> splitTextInSplits(String string, String delimiter) {
         return List.of(string.split(delimiter));
@@ -403,7 +422,7 @@ public class General {
      * @param string    the string to split into tokens
      * @param delimiter what to split the string along
      * @param how_many  how many tokens to return
-     * @return a list of strings
+     * @return immutable list of strings
      */
     public static List<String> splitTextInSplits(String string, String delimiter, int how_many) {
         return List.of(string.split(delimiter, how_many));
