@@ -35,7 +35,7 @@ dependencies {
 ```
 
 
-Where TAG is syncrhonized with that of the maven counterpart (<a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/1.0.0" target="_blank">Maven Central</a>).
+Where TAG is synchronized with that of the maven counterpart (<a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/1.0.0" target="_blank">Maven Central</a>).
 
 
 <br />
@@ -62,4 +62,8 @@ String htmlFree = removeHtmlFromText(htmlFull); //howdy!
 
 There's a lot of WIP, but it's only expanding, and will also tend toward optimization in future releases.
 
-For more, please check individual documentation.
+For more, please check individual documentation or the <a href="https://tundeadetunji.github.io/api-java-code/" target="_blank">main documentation site</a>.
+<br />
+<br />
+For the Android Framework version of the project, see <a href="https://github.com/tundeadetunji/api-android-general_module" target="_blank">here</a>.
+
