@@ -1,13 +1,12 @@
 package io.github.tundeadetunji;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
-public class ServerSide {
+public final class ServerSide {
 
     public static String Post(String resource, String json, String method) throws IOException {
         URL url = new URL(resource);
@@ -34,5 +33,20 @@ public class ServerSide {
 
     public static String Post(String resource, String json) throws IOException {
         return Post(resource, json, "POST");
+    }
+
+    public static String peek(String url){
+        String result = "";
+        try {
+            URL resource = new URL(url);
+            URLConnection conn = resource.openConnection();
+            InputStream is = conn.getInputStream();
+            result = new String(is.readAllBytes());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

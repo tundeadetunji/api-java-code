@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
 
-public class Json {
+public final class Json {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static String from(Object entity) throws JsonProcessingException {

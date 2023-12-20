@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class General {
+public final class General {
 
     public enum IDPattern {
         Short, Short_DateOnly, Short_DateTime, Long, Long_DateTime

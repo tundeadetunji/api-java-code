@@ -6,7 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-public class Machine {
+public final class Machine {
     public static Object getTextFromClipboard() throws IOException, UnsupportedFlavorException {
         return Toolkit.getDefaultToolkit()
                 .getSystemClipboard().getData(DataFlavor.stringFlavor);
