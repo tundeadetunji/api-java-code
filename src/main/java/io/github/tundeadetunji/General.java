@@ -1,5 +1,6 @@
 package io.github.tundeadetunji;
 
+import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -622,18 +623,13 @@ public final class General {
         return prefx;
     }
 
+    public static <T, K, V> List<T> mapToList(Map<K, V> map, SideToReturn sideToReturn){
+        List<T> result = new ArrayList<>();
+        for (Map.Entry<K,V> entry : map.entrySet()){
+            result.add(sideToReturn == SideToReturn.Left ? (T)entry.getKey() : (T)entry.getValue());
+        }
+        return result;
+    }
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

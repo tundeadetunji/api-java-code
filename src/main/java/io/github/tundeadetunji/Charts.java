@@ -2,6 +2,7 @@ package io.github.tundeadetunji;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Methods to construct charts dynamically. Pass in appropriate parameters,
@@ -14,23 +15,39 @@ import java.util.List;
  */
 public final class Charts {
 
-    public static String pie(List<Object> values) {
+    public static <T> String pie(List<T> values) {
         return Chart_Pie_String(values, null, 470, 300);
     }
 
-    public static String pie(List<Object> values, List<String> colors) {
+    public static <K, V> String pie(Map<K, V> values) {
+        return Chart_Pie_String(General.mapToList(values, General.SideToReturn.Right), null, 470, 300);
+    }
+
+    public static <T> String pie(List<T> values, List<String> colors) {
         return Chart_Pie_String(values, colors, 470, 300);
     }
 
-    public static String pie(List<Object> values, List<String> colors, int width, int height) {
+    public static <K, V> String pie(Map<K, V> values, List<String> colors) {
+        return Chart_Pie_String(General.mapToList(values, General.SideToReturn.Right), colors, 470, 300);
+    }
+
+    public static <T> String pie(List<T> values, List<String> colors, int width, int height) {
         return Chart_Pie_String(values, colors, width, height);
     }
 
-    public static String pie(List<Object> values, int width, int height) {
+    public static <K, V> String pie(Map<K, V> values, List<String> colors, int width, int height) {
+        return Chart_Pie_String(General.mapToList(values, General.SideToReturn.Right), colors, width, height);
+    }
+
+    public static <T> String pie(List<T> values, int width, int height) {
         return Chart_Pie_String(values, null, width, height);
     }
 
-    private static String Chart_Pie_String(List<Object> values, List<String> colors, int width, int height) {
+    public static <K, V> String pie(Map<K, V> values, int width, int height) {
+        return Chart_Pie_String(General.mapToList(values, General.SideToReturn.Right), null, width, height);
+    }
+
+    private static <T> String Chart_Pie_String(List<T> values, List<String> colors, int width, int height) {
         String id = io.github.tundeadetunji.General.newGUID(General.IDPattern.Short);
         return new StringBuilder().append("<canvas id=\"" + id.toString() + "\" width=\"" + width + "\" height=\"" + height + "\" style=\"width: " + width + "px; height: " + height + "px\"></canvas>" + "\r\n" +
                         "			<script>" + "\r\n" +
@@ -42,7 +59,7 @@ public final class Charts {
                 .toString();
     }
 
-    private static String Chart_Pie_Variable(List<Object> values, List<String> colorsList) {
+    private static <T> String Chart_Pie_Variable(List<T> values, List<String> colorsList) {
 
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < values.size(); i++) {
