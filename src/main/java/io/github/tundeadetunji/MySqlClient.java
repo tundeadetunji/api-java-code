@@ -295,7 +295,7 @@ public final class MySqlClient {
                 }
             }
 
-            result.append(selectKeys == null ? " * FROM " + table : " FROM " + table);
+            result.append(selectKeys == null ? " * FROM " + database + "." + table : " FROM " + database + "." + table);
 
             if (whereKeysValues != null) {
                 result.append(" WHERE (");
@@ -310,18 +310,3 @@ public final class MySqlClient {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
