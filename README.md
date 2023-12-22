@@ -11,7 +11,7 @@ A project containing handy functions for daily use.
 ```
 
 
-Check it out on <a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/1.0.0" target="_blank">Maven Central</a>
+Check it out on <a href="https://mvnrepository.com/artifact/io.github.tundeadetunji/code" target="_blank">Maven Central</a>
 
 
 If using Gradle:
