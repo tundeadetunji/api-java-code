@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * For example
+ * MySqlClient client = MySqlClient.initialize(url, "","");
+ * client.select("table_name_here", List.of("username", "first_name"), Map.of("id", "2000"));
+ */
 public final class MySqlClient {
 
     private static MySqlClient instance;
@@ -39,7 +44,7 @@ public final class MySqlClient {
      * @param whereKeysValues
      * @return List of Objects corresponding to the rows retrieved.
      */
-    public <K, V> Map<K, V> countGrouped(String table, String countField, Map<String, String> whereKeysValues) {
+    public <K, V> Map<K, V> countGrouped(String table, String countField, Map<K, V> whereKeysValues) {
         return getRows(Queries.countGrouped(mDatabase, table, countField, whereKeysValues));
     }
 
@@ -98,7 +103,7 @@ public final class MySqlClient {
      * @param <V>
      * @return
      */
-    public <K, V> Map<K, V> averageGrouped(String table, String averageField, String groupField, Map<String, String> whereKeysValues) {
+    public <K, V> Map<K, V> averageGrouped(String table, String averageField, String groupField, Map<K, V> whereKeysValues) {
         return getRows(Queries.averageGrouped(mDatabase, table, averageField, groupField, whereKeysValues));
     }
 
@@ -127,7 +132,7 @@ public final class MySqlClient {
      * @param <V>
      * @return
      */
-    public <K, V> Map<K, V> select(String table, List<String> selectKeys, Map<String, String> whereKeysValues) {
+    public <K, V> Map<K, V> select(String table, List<String> selectKeys, Map<K, V> whereKeysValues) {
         return getRows(Queries.select(mDatabase, table, selectKeys, whereKeysValues));
     }
 
@@ -153,7 +158,7 @@ public final class MySqlClient {
          * @param whereKeysValues
          * @return
          */
-        public static String countGrouped(String database, String table, String countField, Map<String, String> whereKeysValues) {
+        public static <K, V> String countGrouped(String database, String table, String countField, Map<K, V> whereKeysValues) {
             //SELECT quarter, COUNT(*) as count FROM database.table WHERE (countField = 'first' and Id = 1) GROUP BY quarter
             StringBuilder result = new StringBuilder("SELECT " + countField + ", COUNT(*) as count FROM " + database + "." + table);
 
@@ -197,7 +202,7 @@ public final class MySqlClient {
          * @param whereKeysValues
          * @return
          */
-        public static String sumGrouped(String database, String table, String sumField, String groupField, Map<String, String> whereKeysValues) {
+        public static <K, V> String sumGrouped(String database, String table, String sumField, String groupField, Map<K, V> whereKeysValues) {
             StringBuilder result = new StringBuilder("SELECT " + groupField + ", SUM(" + sumField + ") FROM " + database + "." + table);
 
             if (whereKeysValues != null) {
@@ -241,7 +246,7 @@ public final class MySqlClient {
          * @param whereKeysValues
          * @return
          */
-        public static String averageGrouped(String database, String table, String averageField, String groupField, Map<String, String> whereKeysValues) {
+        public static <K, V> String averageGrouped(String database, String table, String averageField, String groupField, Map<K, V> whereKeysValues) {
             StringBuilder result = new StringBuilder("SELECT " + groupField + ", AVG(" + averageField + ") FROM " + database + "." + table);
 
             if (whereKeysValues != null) {
@@ -285,7 +290,7 @@ public final class MySqlClient {
          * @param whereKeysValues
          * @return
          */
-        public static String select(String database, String table, List<String> selectKeys, Map<String, String> whereKeysValues) {
+        public static <K, V> String select(String database, String table, List<String> selectKeys, Map<K, V> whereKeysValues) {
             StringBuilder result = new StringBuilder().append("SELECT");
 
             if (selectKeys != null) {
