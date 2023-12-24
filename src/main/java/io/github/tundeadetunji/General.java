@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * Custom functions for everyday use.
+ */
 public final class General {
 
     public enum IDPattern {

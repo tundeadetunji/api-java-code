@@ -6,6 +6,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * Functions relating to HTTP requests.
+ */
 public final class ServerSide {
 
     public static String Post(String resource, String json, String method) throws IOException {
