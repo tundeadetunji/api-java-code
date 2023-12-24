@@ -6,7 +6,7 @@
 
     <groupId>io.github.tundeadetunji</groupId>
     <artifactId>code</artifactId>
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.1.1</version>
 
     <name>Code Repertoire</name>
     <description>A project containing handy functions for daily use.</description>
