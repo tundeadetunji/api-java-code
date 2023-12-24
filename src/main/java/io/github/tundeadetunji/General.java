@@ -1,6 +1,8 @@
 package io.github.tundeadetunji;
 
 import javax.swing.*;
+import java.io.*;
+import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -142,7 +144,7 @@ public final class General {
      * Custom HTML snippet, intended to be for preview only.
      * The CSS and JS are based on Shoppy template's resources, but defaults to Bootstrap's
      * in the absence of Shoppy's.
-     *
+     * <p>
      * Shoppy Template used: https://w3layouts.com/template/shoppy-e-commerce-admin-panel-responsive-web-template/
      * License (as at time of this file) at https://creativecommons.org/licenses/by/3.0/
      *
@@ -379,6 +381,7 @@ public final class General {
     public static List<String> stringToList(String string, String delimiter) {
         return List.of(string.split(delimiter));
     }
+
     /**
      * Splits a string into tokens, each of which represents the string split along the characters specified
      * by delimiter.
@@ -513,7 +516,8 @@ public final class General {
 
     /**
      * Turns phrase or sentence to continuous tense, and appends it with specified text.
-     * @param text phrase or sentence
+     *
+     * @param text   phrase or sentence
      * @param suffix what to append to the output
      * @return string in continuous tense form
      */
@@ -570,6 +574,7 @@ public final class General {
 
     /**
      * Turns phrase or sentence to continuous tense.
+     *
      * @param text phrase or sentence
      * @return string in continuous tense form
      */
@@ -623,13 +628,39 @@ public final class General {
         return prefx;
     }
 
-    public static <T, K, V> List<T> mapToList(Map<K, V> map, SideToReturn sideToReturn){
+    public static <T, K, V> List<T> mapToList(Map<K, V> map, SideToReturn sideToReturn) {
         List<T> result = new ArrayList<>();
-        for (Map.Entry<K,V> entry : map.entrySet()){
-            result.add(sideToReturn == SideToReturn.Left ? (T)entry.getKey() : (T)entry.getValue());
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            result.add(sideToReturn == SideToReturn.Left ? (T) entry.getKey() : (T) entry.getValue());
         }
         return result;
     }
 
+    public static <T> void writeText(String filepath, T s) {
+        try (FileWriter file = new FileWriter(filepath)) {
+            file.write(String.valueOf(s));
+        } catch (IOException ignored) {
+        }
+    }
 
+    /**
+     * Reads text from file, or http or https resource (expected to be text).
+     * @param resource
+     * @return
+     */
+    public static String readText(String resource) {
+        if (resource.trim().toLowerCase().startsWith("http")){
+            return ServerSide.peek(resource);
+        }
+        StringBuilder sb = new StringBuilder();
+        try {
+            List<String> lines = java.nio.file.Files.readAllLines(FileSystems.getDefault().getPath(resource));
+            for (int i = 0; i < lines.size(); i++) {
+                sb.append(lines.get(i)).append(i < lines.size() ? '\n' : "");
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return sb.toString();
+    }
 }
