@@ -60,8 +60,6 @@ String htmlFull = "<h3>howdy!</h3>";
 String htmlFree = removeHtmlFromText(htmlFull); //howdy!
 ```
 
-There's a lot of WIP, but it's only expanding, and will also tend toward optimization in future releases.
-
 For more, please check individual documentation or the <a href="https://tundeadetunji.github.io/api-java-code-javadoc/" target="_blank">main documentation site</a>.
 <br />
 <br />
