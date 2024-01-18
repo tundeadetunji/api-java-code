@@ -12,6 +12,7 @@ import java.io.IOException;
 public final class Machine {
     /**
      * Reads text content from clipboard.
+     *
      * @return
      * @throws IOException
      * @throws UnsupportedFlavorException
@@ -23,6 +24,7 @@ public final class Machine {
 
     /**
      * Writes text to clipboard.
+     *
      * @param text
      */
     public static void sendTextToClipboard(String text) {
@@ -36,6 +38,7 @@ public final class Machine {
 
     /**
      * Reads text content from clipboard.
+     *
      * @return
      * @throws IOException
      * @throws UnsupportedFlavorException
@@ -46,10 +49,11 @@ public final class Machine {
 
     /**
      * Writes text to clipboard.
+     *
      * @param text
      */
     public static void writeTextToClipboard(String text) {
         sendTextToClipboard(text);
     }
 
-    }
+}
