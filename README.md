@@ -39,6 +39,18 @@ Where TAG is synchronized with that of the maven counterpart (<a href="https://c
 
 
 <br />
+<br />
+For non-static imports (as required):
+<br />
+<br />
+<pre>
+import io.github.tundeadetunji.CameraAndMic.camera;
+import io.github.tundeadetunji.CameraAndMic.mic;
+import io.github.tundeadetunji.MySqlClient;
+</pre>
+
+<br />
+<br />
 For static imports (as required):
 <br />
 <br />
@@ -47,6 +59,9 @@ import static io.github.tundeadetunji.General.*;
 import static io.github.tundeadetunji.Machine.*;
 import static io.github.tundeadetunji.InCodeSpringBootGui.*;
 import static io.github.tundeadetunji.InCodeSpringBootApi.*;
+import static io.github.tundeadetunji.Json.*;
+import static io.github.tundeadetunji.ServerSide.*;
+import static io.github.tundeadetunji.Charts.*;
 </pre>
 
 To check if a string is valid email, for example:
