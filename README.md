@@ -351,7 +351,7 @@ Constants (in an example Vault class):
 
 ```java
 public class Vault {
-    public static final String ENCRYPTION_KEY = System.getenv(Phrase.ENCRYPTION_KEY); //ENCRYPTION_KEY must be generated/encoded with minimum of 32 Bytes / 256 bits, found one at https://generate-random.org/encryption-key-generator (no affiliations whatsoever)
+    public static final String ENCRYPTION_KEY = System.getenv(Phrase.ENCRYPTION_KEY); //ENCRYPTION_KEY must be generated/encoded with minimum of 32 Bytes / 256 bits, found one at https://generate-random.org/encryption-key-generator (no affiliation whatsoever)
 }
 ```
 
