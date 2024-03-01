@@ -78,7 +78,12 @@ String htmlFree = removeHtmlFromText(htmlFull); //howdy!
 For more, please check individual documentation or the <a href="https://tundeadetunji.github.io/api-java-code-javadoc/" target="_blank">main documentation site</a>.
 <br />
 <br />
-For the Android Framework version of the project, see <a href="https://github.com/tundeadetunji/api-android-general_module" target="_blank">here</a>.
+For the Android framework version of the project, see <a href="https://github.com/tundeadetunji/api-android-general_module" target="_blank">here</a>.
+<br />
+<br />
+For the .Net framework version, see <a href="https://github.com/tundeadetunji/api-dot_net-all_modules" target="_blank">here</a>.
+<br />
+<br />
 <br />
 <br />
 
