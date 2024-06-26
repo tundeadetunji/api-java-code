@@ -29,7 +29,7 @@ public final class General {
     }
 
     public enum SideToReturn {
-        Left, Right, AsArray, AsListOfString, AsListToString, AsCustomApplicationInfo, AsCustomApplicationInfoDisplayName, AsCustomApplicationInfoProcessName, AsCustomApplicationInfoFilename, AsCustomApplicationInfoInstallLocation
+        Left, Right, AsArray, AsListOfString, AsListToString, AsCustomApplicationInfo, AsCustomApplicationInfoDisplayName, AsCustomApplicationInfoProcessName, AsCustomApplicationInfoFilename, AsCustomApplicationInfoInstallLocation, Middle
     }
 
     public enum SearchStringOperator {
@@ -666,4 +666,221 @@ public final class General {
         }
         return sb.toString();
     }
+
+
+
+    public static String ToContinuous(String text, String suffx) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        String prefx = "";
+        String[] lastThree = lastThreeLetters(text);
+
+        if (!isAlphabet(lastThree[0]) || !isAlphabet(lastThree[1])
+                || !isAlphabet(lastThree[2])) {
+            return "";
+        }
+
+        String a = lastThree[0].toLowerCase();
+        String b = lastThree[1].toLowerCase();
+        String c = lastThree[2].toLowerCase();
+
+
+        if (a.equals("i") && b.equals("n") && c.equals("g")) {
+            return text;
+        }
+
+        // If IsConsonant(a) And IsVowel(b) And IsConsonant(c) Then
+        // prefx = text & Mid(text.Trim, text.Length, 1).Trim & "ing"
+        // ElseIf b = "i" And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 2).Trim & "ying"
+        // ElseIf IsVowel(a) And IsConsonant(b) And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 1).Trim & "ing"
+        // Else
+        // prefx = text.Trim & "ing"
+        // End If
+
+        if (isConsonant(a) && isVowel(b) && isConsonant(c)) {
+            // swim, stop, run, begin
+            prefx = text + text.substring(text.length() - 1).trim() + "ing";
+        }
+        else if (b.equals("i") && c.equals("e")){
+            //lie, die
+            prefx = text.substring(0, text.length()-2).trim() + "ying";
+        }
+        else if (isVowel(a) && isConsonant(b) && c.equals("e")){
+            //come, mistake
+            prefx = text.substring(0,text.length() - 1).trim() + "ing";
+        }
+        else{
+            prefx = text.trim() + "ing";
+        }
+        //mix, deliver
+
+        // Return RTrim(prefx) & " " & LTrim(suffx)
+        return prefx + " " + suffx;
+
+    }
+
+    public static String ToContinuous(String text) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        String prefx = "";
+        String[] lastThree = lastThreeLetters(text);
+
+        if (!isAlphabet(lastThree[0]) || !isAlphabet(lastThree[1])
+                || !isAlphabet(lastThree[2])) {
+            return "";
+        }
+
+        String a = lastThree[0].toLowerCase();
+        String b = lastThree[1].toLowerCase();
+        String c = lastThree[2].toLowerCase();
+
+
+        if (a.equals("i") && b.equals("n") && c.equals("g")) {
+            return text;
+        }
+
+        // If IsConsonant(a) And IsVowel(b) And IsConsonant(c) Then
+        // prefx = text & Mid(text.Trim, text.Length, 1).Trim & "ing"
+        // ElseIf b = "i" And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 2).Trim & "ying"
+        // ElseIf IsVowel(a) And IsConsonant(b) And c = "e" Then
+        // prefx = Mid(text.Trim, 1, text.Length - 1).Trim & "ing"
+        // Else
+        // prefx = text.Trim & "ing"
+        // End If
+
+        if (isConsonant(a) && isVowel(b) && isConsonant(c)) {
+            // swim, stop, run, begin
+            prefx = text + text.substring(text.length() - 1).trim() + "ing";
+        }
+        else if (b.equals("i") && c.equals("e")){
+            //lie, die
+            prefx = text.substring(0, text.length()-2).trim() + "ying";
+        }
+        else if (isVowel(a) && isConsonant(b) && c.equals("e")){
+            //come, mistake
+            prefx = text.substring(0,text.length() - 1).trim() + "ing";
+        }
+        else{
+            prefx = text.trim() + "ing";
+        }
+        //mix, deliver, cradle, juggle
+
+        // Return RTrim(prefx) & " " & LTrim(suffx)
+        return prefx;
+    }
+
+    /**
+     * Checks if string is empty
+     * @param text text to check
+     * @return true if text.trim() is empty
+     */
+    public static boolean isEmptyString(String text){
+        return text.trim().isEmpty();
+    }
+
+    /**
+     * Checks if string is empty
+     * @param text text to check
+     * @param should_trim check text.trim() instead
+     * @return true if it's eventually empty
+     */
+    public static boolean isEmptyString(String text, boolean should_trim){
+        boolean r;
+        if(should_trim){
+            r = text.trim().length() < 1;
+        }
+        else{
+            r = text.length()< 1;
+        }
+        return r;
+    }
+
+    public static String otherWords(String text) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        return splitTextInTwo(text, " ", SideToReturn.Right);
+    }
+
+    public static String firstWord(String text) {
+        if (text.trim().length() < 1) {
+            return "";
+        }
+
+        return splitTextInSplits(text, " ").get(0);
+    }
+
+    public static String joinTextFromSplits(ArrayList<String> splits, String separator) {
+        if (splits.size() < 1 || separator.length() < 1) {
+            return "";
+        }
+        //return String.join(separator, splits);
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < splits.size(); i++) {
+            s.append(splits.get(i));
+            if (i < splits.size() - 1) {
+                s.append(separator);
+            }
+        }
+        return s.toString();
+    }
+    public static String splitText(String string_to_split, String separator, SideToReturn side_to_return) {
+        if (string_to_split.trim().length() < 1 || separator.length() < 1) {
+            return "";
+        }
+
+        String r = "";
+
+        List<String> s = splitTextInSplits(string_to_split, separator);
+
+        switch (side_to_return) {
+            case Left:
+                r = s.get(0);
+                break;
+            case Middle:
+            case Right:
+                ArrayList<String> l = new ArrayList<String>();
+                for (int i = 1; i < s.size(); i++) {
+                    l.add(s.get(i));
+                }
+                r = joinTextFromSplits(l, separator);
+                break;
+        }
+        return r;
+    }
+
+    public static String splitTextInThree(String string_to_split, String separator, SideToReturn side_to_return) {
+        if (string_to_split.trim().length() < 1 || separator.length() < 1) {
+            return "";
+        }
+
+        String r = "";
+
+        List<String> s = splitTextInSplits(string_to_split, separator);
+
+        switch (side_to_return) {
+            case Left:
+                r = s.get(0);
+                break;
+            case Middle:
+                r = s.get(1);
+                break;
+            case Right:
+                r = s.get(2);
+                break;
+        }
+        return r;
+    }
+    public static int getWordCount(String s){
+        return splitTextInSplits(s, " ").size();
+    }
+
 }
