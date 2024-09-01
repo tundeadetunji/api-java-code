@@ -11,7 +11,7 @@ A programmer's toolkit - contains handy functions for daily use.
 ```
 
 
-Check it out on <a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/2.2.2" target="_blank">Maven Central</a>
+Check it out on <a href="https://central.sonatype.com/artifact/io.github.tundeadetunji/code/2.2.3" target="_blank">Maven Central</a>
 
 
 If using Gradle:
