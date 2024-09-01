@@ -3,7 +3,7 @@ package io.github.tundeadetunji;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class BitConverter implements ConverterStrategy{
+public class BitConverter implements ConverterStrategy {
 
     private static BitConverter instance;
     public static BitConverter getInstance(){
@@ -42,7 +42,6 @@ public class BitConverter implements ConverterStrategy{
     }
 
 
-
     public enum Unit {
         Bit,
         Byte,
@@ -50,9 +49,9 @@ public class BitConverter implements ConverterStrategy{
         Megabyte;
 
         public static String[] toStringArray(){
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return (String[]) Arrays.stream(DataUnit.values()).map(Enum::toString).toArray();
-        }*/
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                return (String[]) Arrays.stream(DataUnit.values()).map(Enum::toString).toArray();
+            }*/
             List<String> result = new ArrayList<>();
             for(Unit unit : Unit.values()){
                 result.add(unit.toString());
@@ -71,7 +70,6 @@ public class BitConverter implements ConverterStrategy{
     }
 
 }
-
 interface ConverterStrategy {
     BigDecimal convert(double from, BitConverter.Unit fromUnit, BitConverter.Unit toUnit) throws UnsupportedOperationException;
 }
