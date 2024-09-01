@@ -8,18 +8,16 @@ import io.github.tundeadetunji.cycles.model.domain.Period;
 import java.time.Month;
 import java.util.List;
 
-/**
- * Same as CyclesFacade, but not making any assumption on what type any View is.
- */
-public class CyclesFacadeLite {
-    private static CyclesFacadeLite instance;
 
-    public static CyclesFacadeLite getInstance() {
-        if (instance == null) instance = new CyclesFacadeLite();
+public class CyclesFacade {
+    private static CyclesFacade instance;
+
+    public static CyclesFacade getInstance() {
+        if (instance == null) instance = new CyclesFacade();
         return instance;
     }
 
-    private CyclesFacadeLite() {
+    private CyclesFacade() {
     }
 
     public Entity createEntity(int month, int day, String name) {
