@@ -6,7 +6,7 @@
 
     <groupId>io.github.tundeadetunji</groupId>
     <artifactId>code</artifactId>
-    <version>2.2.5</version>
+    <version>2.2.6_SNAPSHOT</version>
 
     <name>Code Repertoire</name>
     <description>A programmer's toolkit - contains handy functions for daily use.</description>
